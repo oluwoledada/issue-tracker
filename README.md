@@ -112,7 +112,7 @@ Add this line of code to the `welcome.blade.php` file to load Load CSS and JS us
 #### Step 5: Create Livewire Component
 
 ```bash
-php artisan make:livewire IssueTracker`
+php artisan make:livewire IssueTracker
 ```
 
 Add this line to the `body` of the `welcome.blade.php` file:
