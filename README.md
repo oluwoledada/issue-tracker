@@ -148,42 +148,30 @@ use Livewire\Component;
 
 class IssueTracker extends Component
 {
-    // Public property to store the list of issues
     public $issues = [];
 
-    // Public property to store the new issue input
     public $newIssue;
 
-    // Method to add a new issue to the list
     public function addIssue()
     {
-        // Check if newIssue is not empty
         if ($this->newIssue) {
-            // Add a new issue to the issues array
             $this->issues[] = ['name' => $this->newIssue, 'status' => 'backlog', 'completed' => false];
-            // Reset the newIssue input to an empty string
             $this->newIssue = '';
         }
     }
 
-    // Method to update the status of an issue
     public function updateStatus($index, $status)
     {
-        // Update the status of the specified issue in the issues array
         $this->issues[$index]['status'] = $status;
     }
 
-    // Method to delete an issue
     public function deleteIssue($index)
     {
-        // Remove the specified issue from the issues array
         unset($this->issues[$index]);
     }
 
-    // Method to render the Livewire component view
     public function render()
     {
-        // Return the rendered view for the Livewire component
         return view('livewire.issue-tracker');
     }
 }
@@ -193,18 +181,14 @@ Next, go to the `issue-tracker.blade.php` file in the `resources/views/livewire/
 
 ```bash
 <div class="px-8 my-8">
-    <!-- Issue Tracker title -->
     <h1 class="flex justify-center text-4xl font-bold">Issue Tracker</h1>
 
-    <!-- Input and "New issue" button -->
     <div class="flex justify-center gap-2 my-6">
         <input wire:model="newIssue" type="text" placeholder="Add a new issue" class="border rounded p-2">
         <button wire:click="addIssue" class="bg-blue-500 text-white px-4 py-2 rounded">New issue</button>
     </div>
 
-    <!-- Grid layout for issue categories -->
     <div class="grid grid-cols-1 items-start gap-4 lg:grid-cols-4">
-        <!-- Loop through issue categories -->
         @foreach(['backlog', 'todo', 'ongoing', 'completed'] as $status)
             <div class="flex flex-col overflow-hidden rounded-lg bg-white shadow-lg">
                 <!-- Category header with background color -->
@@ -212,17 +196,13 @@ Next, go to the `issue-tracker.blade.php` file in the `resources/views/livewire/
                     <h3 class="text-lg font-semibold px-2">{{ ucfirst($status) }}</h3>
                 </div>
 
-                <!-- List of issues for the current category -->
                 <ul class="grow p-3">
-                    <!-- Loop through the issues -->
                     @foreach($issues as $index => $issue)
-                        <!-- Display issues that match the current category -->
                         @if($issue['status'] === $status)
                             <h6 class="mb-2 border-b-2 border-gray-200 py-1 text-2xl font-medium">
                                 {{ $issue['name'] }}
                             </h6>
                             <li>
-                                <!-- Buttons for updating status and deleting the issue -->
                                 <div class="text-xs space-y-3">
                                     <button wire:click="updateStatus({{ $index }}, 'backlog')" class="inline-flex items-center justify-center space-x-2 rounded-lg border bg-gray-300 px-2 py-1">
                                         Backlog
