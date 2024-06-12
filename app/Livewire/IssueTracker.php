@@ -7,6 +7,7 @@ use Livewire\Component;
 class IssueTracker extends Component
 {
     public $issues = [];
+
     public $newIssue;
 
     public function addIssue()
